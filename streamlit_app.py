@@ -4,6 +4,7 @@ A cutting-edge multimodal RAG system for intelligent podcast search and analysis
 """
 
 import streamlit as st
+import sys
 import os
 import json
 import time
@@ -14,6 +15,45 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 import tempfile
+
+# Add error handling for missing dependencies
+try:
+    import numpy as np
+    import pandas as pd
+    import streamlit as st
+    from streamlit_option_menu import option_menu
+    import plotly.express as px
+    import plotly.graph_objects as go
+    import altair as alt
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    from PIL import Image
+    import requests
+    import json
+    import time
+    import datetime
+    from datetime import datetime, timedelta
+    import warnings
+    warnings.filterwarnings('ignore')
+    
+    # Try to import optional dependencies
+    try:
+        import whisperx
+        WHISPERX_AVAILABLE = True
+    except ImportError:
+        WHISPERX_AVAILABLE = False
+        st.warning("⚠️ WhisperX not available. Audio transcription features will be limited.")
+    
+    try:
+        import pyannote.audio
+        PYANNOTE_AVAILABLE = True
+    except ImportError:
+        PYANNOTE_AVAILABLE = False
+        st.warning("⚠️ Pyannote.audio not available. Speaker diarization features will be limited.")
+        
+except ImportError as e:
+    st.error(f"❌ Critical dependency missing: {e}")
+    st.stop()
 
 # Import our custom modules
 from config import config

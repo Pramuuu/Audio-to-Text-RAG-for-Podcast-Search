@@ -149,8 +149,9 @@ data/
 *.log
 env_template.txt
 
-# Streamlit
-.streamlit/
+# Streamlit (allow config files)
+.streamlit/*
+!.streamlit/config.toml
 
 # OS generated files
 .DS_Store
